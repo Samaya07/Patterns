@@ -1,4 +1,4 @@
-public class Spiral{
+public class Spirall{
   public static void main(String[] args) 
   {
       int[][] arr=new int[][]{{0,3,0,1,1},{4,3,5,0,2},{3,0,1,5,0},{0,2,0,4,1},{4,2,5,1,2}};
