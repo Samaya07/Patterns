@@ -1,0 +1,76 @@
+public class Spiral{
+  public static void main(String[] args) 
+  {
+      int[][] arr=new int[][]{{0,3,0,1,1},{4,3,5,0,2},{3,0,1,5,0},{0,2,0,4,1},{4,2,5,1,2}};
+      int n=arr.length;
+      int fixedrc=0,index=0,varyrc=0,lastIndex2=0,lastIndex1=n-1;
+      int[] myArr=new int[n*n];
+      int[] resultArr=new int[n*n];
+      resultArr= travRight(arr,lastIndex1,varyrc,myArr,fixedrc,index,lastIndex2,n); 
+      //calling the travRight function so the traversal starts in the clockwise direction(Right,Down,Left,Up)
+      for(int i=0;i<n*n;i++)
+      {
+          System.out.print(resultArr[i]+" ");
+      }
+      System.out.println();
+  }
+    /*arr= array given
+    lastIndex1=the index of last number to print in travRight, travDown(n)
+    varyrc=the varying row/column to start from in the array given(a)
+    myArr= the array that stores the result
+    fixedrc=the fixed row/column to traverse in the array given(m)
+    index=holds the index of the result array(k)
+    lastIndex2=the index of last number to print in travLeft, travUp(s)*/
+    public static int[] travRight(int[][] A,int lastIndex1,int varyrc,int[]myArr,int fixedrc,int index,int lastIndex2,int n)
+    {
+        for(int i=varyrc;i<=lastIndex1;i++) //stores the numbers, using varyrc,fixedrc and the last index it can traverse to
+        {
+            myArr[index]=A[fixedrc][i];
+            index++;
+        }
+        if(index==n*n) //if all of the numbers in the 2D array of size 'n' are traversed, it returns myArr
+        {
+            return myArr;
+        }
+        return travDown(A,lastIndex1,varyrc+1,myArr,lastIndex1,index,lastIndex2,n); //parameters changed for the down traversal
+    }
+    public static int[] travDown(int[][] A,int lastIndex1,int varyrc,int[]myArr,int fixedrc,int index,int lastIndex2,int n)
+    {
+        for(int i=varyrc;i<=lastIndex1;i++)
+        {
+            myArr[index]=A[i][fixedrc];
+            index++;
+        }
+        if(index==n*n)
+        {
+            return myArr;
+        }
+        return travLeft(A,lastIndex1,lastIndex1-1,myArr,lastIndex1,index,lastIndex2,n);
+    }
+    public static int[] travLeft(int[][] A,int lastIndex1,int varyrc,int[]myArr,int fixedrc,int index,int lastIndex2,int n)
+    {
+        for(int i=varyrc;i>=lastIndex2;i--)
+        {
+            myArr[index]=A[fixedrc][i];
+            index++;
+        }
+        if(index==n*n)
+        {
+            return myArr;
+        }
+        return travUp(A,lastIndex1-1,varyrc,myArr,lastIndex2,index,lastIndex2+1,n);
+    }
+    public static int[] travUp(int[][] A,int lastIndex1,int varyrc,int[] myArr,int fixedrc,int index,int lastIndex2,int n)
+    {
+        for(int i=varyrc;i>=lastIndex2;i--)
+        {
+            myArr[index]=A[i][fixedrc];
+            index++;
+        }
+        if(index==n*n)
+        {
+            return myArr;
+        }
+        return travRight(A,lastIndex1,lastIndex2,myArr,fixedrc+1,index,lastIndex2,n);
+    }
+}
