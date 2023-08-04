@@ -1,2 +1,2 @@
 # my-repo-2
-Java programs containing patterns
+This respository contains programs in java for different patterns.
